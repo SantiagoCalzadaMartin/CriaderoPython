@@ -38,18 +38,39 @@ def AñadirDatos():
     print("Base de datos actualizada.")
     VerBaseDatos()
 
+
+#Metodo para buscar perros por raza
 def BuscarDatos(raza):
+    encotrado = False
     for perro in perros:
         if raza == perro[0]:
             raza = perro[0]
             nombre = perro[1]
             precio = perro[2]
             print(raza.ljust(25), nombre.ljust(25), str(precio).ljust(10))
+            encotrado = True
+    if encotrado == False:
+        print("No disponemos de esa raza")
+
+#Metodo para actualizar precios de perros que estan en la base de datos
+def ActualizarPrecio():
+    encotrado = False
+    razaP = input("Dime la raza del perro: ")
+    nombreP = input("Dime el nombre del perro: ")
+    for perro in perros:
+        if razaP == perro[0] and nombreP == perro[1]:
+            precio = perro[2]
+            print(razaP.ljust(25), nombreP.ljust(25), str(precio).ljust(10))
+            NuevoPrecio = input("introduce el nuevo precio: ")
+            perro[2] = NuevoPrecio
+            print("Precio actualizado")
+            encotrado = True
+    if encotrado == False:
+        print("No disponemos de esa raza")
 
 
-
-while opcion !=3:
-    opcion = int(input("Elige la opción\n1- Ver base de datos\n2- Modificar base de datos\n3- Buscar un perro por raza\n4- Salir del programa\n"))
+while opcion !=5:
+    opcion = int(input("Elige la opción\n1- Ver base de datos\n2- Añadir perro\n3- Buscar un perro por raza\n4- Actualizar precio\n5- Salir del programa\n"))
     match opcion:
         
         case 1:
@@ -60,6 +81,8 @@ while opcion !=3:
             razaP = input("Dime la raza del perro: ")
             BuscarDatos(razaP)
         case 4:
+            ActualizarPrecio()
+        case 5:
             print("Saliendo...")
         case _:
             print("Opción no válida, por favor intenta de nuevo.")
