@@ -1,3 +1,5 @@
+
+print("\n"*10)
 print("Bienvenido a PerriClub")
 
 
@@ -31,9 +33,11 @@ def VerBaseDatos():
 
 #Metodo para añadir datos al array de perros
 def AñadirDatos():
+    print("\n"*2)
     raza = input("Ingresa la raza del perro: ")
     nombre = input("Ingresa el nuevo nombre del perro: ")
     precio = input("Ingresa el precio: ")
+
     perros.append([raza,nombre,precio])
     print("Base de datos actualizada.")
     VerBaseDatos()
@@ -47,14 +51,22 @@ def BuscarDatos(raza):
             raza = perro[0]
             nombre = perro[1]
             precio = perro[2]
+            print("\n"*10)
             print(raza.ljust(25), nombre.ljust(25), str(precio).ljust(10))
             encotrado = True
+            print("\n"*2)
+            input("Pulsa Enter para continuar") 
+            print("\n"*10)
     if encotrado == False:
         print("No disponemos de esa raza")
+        print("\n"*2)
+        input("Pulsa Enter para continuar") 
+        print("\n"*10)
 
 #Metodo para actualizar precios de perros que estan en la base de datos
 def ActualizarPrecio():
     encotrado = False
+    print("\n"*2)
     razaP = input("Dime la raza del perro: ")
     nombreP = input("Dime el nombre del perro: ")
     for perro in perros:
@@ -62,11 +74,18 @@ def ActualizarPrecio():
             precio = perro[2]
             print(razaP.ljust(25), nombreP.ljust(25), str(precio).ljust(10))
             NuevoPrecio = input("introduce el nuevo precio: ")
-            perro[2] = NuevoPrecio
-            print("Precio actualizado")
+            if(NuevoPrecio < 0):
+                 print("Precio introducido no aceptado")
+            else:
+                perro[2] = NuevoPrecio
+                print("Precio actualizado")
             encotrado = True
     if encotrado == False:
         print("No disponemos de esa raza")
+        print("\n"*2)
+        input("Pulsa Enter para continuar") 
+        print("\n"*10)
+
 
 
 while opcion !=5:
@@ -78,6 +97,7 @@ while opcion !=5:
         case 2:
             AñadirDatos()
         case 3:
+            print("\n"*10)
             razaP = input("Dime la raza del perro: ")
             BuscarDatos(razaP)
         case 4:
