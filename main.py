@@ -36,11 +36,13 @@ def AñadirDatos():
     print("\n"*2)
     raza = input("Ingresa la raza del perro: ")
     nombre = input("Ingresa el nuevo nombre del perro: ")
-    precio = input("Ingresa el precio: ")
-
-    perros.append([raza,nombre,precio])
-    print("Base de datos actualizada.")
-    VerBaseDatos()
+    precio = int(input("Ingresa el precio: "))
+    if(precio < 0):
+        print("Precio introducido no aceptado")
+    else:
+        perros.append([raza,nombre,precio])
+        print("Base de datos actualizada.")
+        VerBaseDatos()
 
 
 #Metodo para buscar perros por raza
@@ -73,7 +75,7 @@ def ActualizarPrecio():
         if razaP == perro[0] and nombreP == perro[1]:
             precio = perro[2]
             print(razaP.ljust(25), nombreP.ljust(25), str(precio).ljust(10))
-            NuevoPrecio = input("introduce el nuevo precio: ")
+            NuevoPrecio = int(input("introduce el nuevo precio: "))
             if(NuevoPrecio < 0):
                  print("Precio introducido no aceptado")
             else:
