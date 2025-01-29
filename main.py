@@ -88,10 +88,21 @@ def ActualizarPrecio():
         input("Pulsa Enter para continuar") 
         print("\n"*10)
 
+def EliminarProducto(razaElim, nombreElim):
+    print("\n")
+    encontrado = False
+    for perro in perros:
+        if nombreElim in perro and razaElim in perro:
+            perros.remove(perro)
+            encontrado = True
+    if encontrado == False:
+        print("Perro no encontrado")
+        print("\n")
+        input("Pulsa Enter para continuar")
+        print("\n"*10)
 
-
-while opcion !=5:
-    opcion = int(input("Elige la opción\n1- Ver base de datos\n2- Añadir perro\n3- Buscar un perro por raza\n4- Actualizar precio\n5- Salir del programa\n"))
+while opcion !=6:
+    opcion = int(input("Elige la opción\n1- Ver base de datos\n2- Añadir perro\n3- Buscar un perro por raza\n4- Actualizar precio\n5- Eliminar productos del inventario\n6- Salir del programa\n"))
     match opcion:
         
         case 1:
@@ -105,6 +116,11 @@ while opcion !=5:
         case 4:
             ActualizarPrecio()
         case 5:
+            print("\n"*10)
+            razaElim = input("Dime la raza del perro que deseas eliminar: ")
+            nombreElim = input("Dime el nombre del perro que deseas eliminar: ")
+            EliminarProducto(razaElim, nombreElim)
+        case 6:
             print("Saliendo...")
         case _:
             print("Opción no válida, por favor intenta de nuevo.")
