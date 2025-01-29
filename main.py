@@ -88,6 +88,17 @@ def ActualizarPrecio():
         input("Pulsa Enter para continuar") 
         print("\n"*10)
 
+def BuscarPorPrecio():
+    encontrado = False
+    precioMaximo = int(input("Introduce en precio maximo: "))
+    for perro in perros:
+        if(precioMaximo >= perro[2]):
+            print(perro[0].ljust(25), perro[1].ljust(25), str(perro[2]).ljust(10))
+            encontrado = True
+    
+    if(encontrado == False):
+        print("No se encontro ningun perro con un precio igual o mas bajo a ", precioMaximo)
+
 def EliminarProducto(razaElim, nombreElim):
     print("\n")
     encontrado = False
@@ -102,7 +113,7 @@ def EliminarProducto(razaElim, nombreElim):
         print("\n"*10)
 
 while opcion !=6:
-    opcion = int(input("Elige la opción\n1- Ver base de datos\n2- Añadir perro\n3- Buscar un perro por raza\n4- Actualizar precio\n5- Eliminar productos del inventario\n6- Salir del programa\n"))
+    opcion = int(input("Elige la opción\n1- Ver base de datos\n2- Añadir perro\n3- Buscar un perro por raza\n4- Actualizar precio\n5- Buscar por precio\n6- Eliminar productos del inventario\n7- Salir del programa\n"))
     match opcion:
         
         case 1:
@@ -116,11 +127,13 @@ while opcion !=6:
         case 4:
             ActualizarPrecio()
         case 5:
+            BuscarPorPrecio()
+        case 6:
             print("\n"*10)
             razaElim = input("Dime la raza del perro que deseas eliminar: ")
             nombreElim = input("Dime el nombre del perro que deseas eliminar: ")
             EliminarProducto(razaElim, nombreElim)
-        case 6:
+        case 7:
             print("Saliendo...")
         case _:
             print("Opción no válida, por favor intenta de nuevo.")
