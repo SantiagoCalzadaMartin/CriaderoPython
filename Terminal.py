@@ -103,7 +103,6 @@ class Terminal:
 
 # El método eliminar_producto se encarga de eliminar un perro que diga el usuario buscandolo por raza y nombre
     def eliminar_producto(self):
-        self.ver_base_datos()
         razaElim = input("Dime la raza del perro que deseas eliminar: ")
         nombreElim = input("Dime el nombre del perro que deseas eliminar: ")
         encontrado = False

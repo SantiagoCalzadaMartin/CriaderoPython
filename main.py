@@ -6,6 +6,7 @@ def main():
     terminal = Terminal()
     interfaz = Interfaz()
 
+
     opcion = 0
     while opcion != 3:
         opcion = int(input("-----------------\n1- Terminal\n-----------------\n2- Interfaz\n-----------------\n3- Salir\n"))
