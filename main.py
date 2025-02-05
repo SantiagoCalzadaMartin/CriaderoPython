@@ -1,6 +1,7 @@
 from Terminal import Terminal
 from Interfaz import Interfaz
 
+# La función main se encarga de englobar el menú de elección entre terminal e interfaz para elegir cual utilizar
 def main():
     terminal = Terminal()
     interfaz = Interfaz()
