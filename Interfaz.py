@@ -1,15 +1,144 @@
 import tkinter as tk
 from tkinter import messagebox
+from tabulate import tabulate
 
 class Interfaz:
 
     perros = [
-        ["Pastor Aleman", "Max", 50],
-        ["Bulldog Frances", "Princesa", 30],
-        ["Chihuahua", "Deborador de mundos", 10],
-        ["Dálmata", "Pancho", 20],
-        ["Husky", "Epi", 25]
-    ]
+    ["Pastor Aleman", "Max", 1200],
+    ["Bulldog Frances", "Princesa", 2500],
+    ["Chihuahua", "Deborador de mundos", 800],
+    ["Dalmata", "Pancho", 1000],
+    ["Husky Siberiano", "Epi", 1500],
+    ["Golden Retriever", "Luna", 1800],
+    ["Labrador Retriever", "Thor", 1600],
+    ["Poodle", "Bella", 1200],
+    ["Rottweiler", "Rocky", 2000],
+    ["Beagle", "Toby", 900],
+    ["Boxer", "Bruno", 1300],
+    ["Husky", "Mimi", 1000],
+    ["Bulldog Ingles", "Winston", 3000],
+    ["Pug", "Lola", 1500],
+    ["Doberman", "Rex", 1800],
+    ["Corgi", "Leo", 2000],
+    ["Schnauzer", "Max", 1200],
+    ["Border Collie", "Luna", 1400],
+    ["Bichon Frise", "Coco", 1100],
+    ["San Bernardo", "Bear", 2500],
+    ["Pastor Aleman", "Rex", 1300],
+    ["Husky", "Lola", 2600],
+    ["Chihuahua", "Peque", 850],
+    ["Dalmata", "Luna", 1100],
+    ["Husky Siberiano", "Nieve", 1600],
+    ["Golden Retriever", "Max", 1900],
+    ["Labrador Retriever", "Bella", 1700],
+    ["Poodle", "Coco", 1250],
+    ["Rottweiler", "Thor", 2100],
+    ["Beagle", "Luna", 950],
+]
+
+    def MostrarPerro(self):
+        ventana_perros = tk.Toplevel()
+        ventana_perros.title("Lista de Perros")
+        ventana_perros.geometry("470x450")
+
+        tabla = tabulate(self.perros, headers=["Raza", "Nombre", "Precio (€)"])
+
+        text = tk.Text(ventana_perros, font=("Courier", 10))
+        text.insert(tk.END, tabla)
+        text.config(state="disabled")
+        text.pack(pady=10, padx=10, expand=True, fill="both")
+
+        btn_cerrar = tk.Button(ventana_perros, text="Cerrar", command=ventana_perros.destroy)
+        btn_cerrar.pack(pady=0)
+
+    def Precio_Perro(self):
+        self.ventana_filtrar = tk.Toplevel()
+        self.ventana_filtrar.title("Mostrar por precio")
+        self.ventana_filtrar.geometry("170x300")
+
+        tk.Label(self.ventana_filtrar, text="Precio maximo").grid(row=0, column=0, pady=10)
+        self.precio_maximo = tk.Entry(self.ventana_filtrar)
+        self.precio_maximo.grid(row=1, column=0, padx=10, pady=10)
+
+        btn_filtrar = tk.Button(self.ventana_filtrar, text="Filtrar", command=self.filtrar_perros)
+        btn_filtrar.grid(row=2, column=0, pady=10)
+
+        btn_cerrar = tk.Button(self.ventana_filtrar, text="Cerrar", command=self.ventana_filtrar.destroy)
+        btn_cerrar.grid(row=3, column=0, pady=10)
+
+
+    
+    def filtrar_perros(self):
+        try:
+            precio_max = float(self.precio_maximo.get())
+            perros_filtrados = [] 
+
+
+            for perro in self.perros:
+                if perro[2] <= precio_max:
+                    perros_filtrados.append(perro)
+
+            ventana_filtrada = tk.Toplevel()
+            ventana_filtrada.title("Perros Filtrados por Precio")
+            ventana_filtrada.geometry("470x450")
+    
+            if perros_filtrados:
+                tabla = tabulate(perros_filtrados, headers=["Raza", "Nombre", "Precio (€)"])
+            else:
+                tabla = "No hay perros con un precio menor o igual al introducido."
+
+            text = tk.Text(ventana_filtrada, font=("Courier", 10))
+            text.insert(tk.END, tabla)
+            text.config(state="disabled")
+            text.pack(pady=10, padx=10, expand=True, fill="both")
+
+            btn_cerrar = tk.Button(ventana_filtrada, text="Cerrar", command=ventana_filtrada.destroy)
+            btn_cerrar.pack(pady=10)
+
+        except ValueError:
+            tk.messagebox.showerror("Error", "Por favor, introduce un valor numerico valido.")
+    
+    def Buscar_raza(self):
+        self.ventana_buscar_raza = tk.Toplevel()
+        self.ventana_buscar_raza.title("Buscar por raza")
+        self.ventana_buscar_raza.geometry("170x300")
+
+        tk.Label(self.ventana_buscar_raza, text="raza").grid(row=0, column=0, pady=10)
+        self.precio_raza = tk.Entry(self.ventana_buscar_raza)
+        self.precio_raza.grid(row=1, column=0, padx=10, pady=10)
+
+        btn_raza = tk.Button(self.ventana_buscar_raza, text="Filtrar", command=self.filtrar_raza)
+        btn_raza.grid(row=2, column=0, pady=10)
+
+        btn_cerrar = tk.Button(self.ventana_buscar_raza, text="Cerrar", command=self.ventana_buscar_raza.destroy)
+        btn_cerrar.grid(row=3, column=0, pady=10)
+
+    def filtrar_raza(self):
+        raza = self.precio_raza.get()
+        perros_filtrados = [] 
+
+        for perro in self.perros:
+                if perro[0] == raza:
+                    perros_filtrados.append(perro)
+
+        ventana_filtrada = tk.Toplevel()
+        ventana_filtrada.title("Perros Filtrados por Precio")
+        ventana_filtrada.geometry("470x450")
+
+        if perros_filtrados:
+            tabla = tabulate(perros_filtrados, headers=["Raza", "Nombre", "Precio (€)"])
+        else:
+            tabla = "No hay perros de la raza introducida."
+
+        text = tk.Text(ventana_filtrada, font=("Courier", 10))
+        text.insert(tk.END, tabla)
+        text.config(state="disabled")
+        text.pack(pady=10, padx=10, expand=True, fill="both")
+
+        btn_cerrar = tk.Button(ventana_filtrada, text="Cerrar", command=ventana_filtrada.destroy)
+        btn_cerrar.pack(pady=10)
+
 
     def Añadir_Perro(self):
         raza = self.Raza.get()
@@ -146,7 +275,7 @@ class Interfaz:
         resultado = tk.Label(self.ventana, text="PerriClub", font=("Arial", 25))
         resultado.grid(row=0, column=0, columnspan=2, pady=20)
 
-        botonMostrar = tk.Button(self.ventana, text="Mostrar Datos", width=15, )
+        botonMostrar = tk.Button(self.ventana, text="Mostrar Datos", width=15, command=self.MostrarPerro)
         botonMostrar.grid(row=1, column=0, padx=10, pady=10)
 
         botonAñadir = tk.Button(self.ventana, text="Añadir perros", width=15, command=self.Ventana_Añadir_Perro)
@@ -158,10 +287,10 @@ class Interfaz:
         botonEliminar = tk.Button(self.ventana, text="Eliminar perro", width=15, command=self.Ventana_Eliminar_Perro)
         botonEliminar.grid(row=2, column=1, padx=10, pady=10)
 
-        BuscarPrecio = tk.Button(self.ventana, text="Buscar por precio", width=15, )
+        BuscarPrecio = tk.Button(self.ventana, text="Buscar por precio", width=15, command=self.Precio_Perro )
         BuscarPrecio.grid(row=3,column=0,padx=10,pady=10)
 
-        buscarRaza = tk.Button(self.ventana,text="Buscar por raza", width=15, )
+        buscarRaza = tk.Button(self.ventana,text="Buscar por raza", width=15, command=self.Buscar_raza)
         buscarRaza.grid(row=4,column=0,padx=10,pady=10)
 
         estadisticas = tk.Button(self.ventana,text="Estadisticas", width=15, command=self.Ventana_Mostrar_Perro_Caro_Barato)
