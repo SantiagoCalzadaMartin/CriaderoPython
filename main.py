@@ -19,4 +19,4 @@ def main():
             case _:
                 print("Número no válido")
 
-main()
+main()  

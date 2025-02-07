@@ -160,23 +160,26 @@ class Interfaz:
 
 
     def Ventana_Añadir_Perro(self):
-        self.ventana = tk.Toplevel()
-        self.ventana.title("Añadir Perro Ventana")
-        self.ventana.geometry("480x300")
+        self.ventana_añadir = tk.Toplevel()
+        self.ventana_añadir.title("Añadir Perro Ventana")
+        self.ventana_añadir.geometry("480x300")
 
-        tk.Label(self.ventana, text="Raza").grid(row=0, column=0, pady=10)
-        self.Raza = tk.Entry(self.ventana)
+        tk.Label(self.ventana_añadir, text="Raza").grid(row=0, column=0, pady=10)
+        self.Raza = tk.Entry(self.ventana_añadir)
         self.Raza.grid(row=1, column=0, padx=10, pady=10)
 
-        tk.Label(self.ventana, text="Nombre").grid(row=0, column=1, pady=10)
-        self.Nombre = tk.Entry(self.ventana)
+        tk.Label(self.ventana_añadir, text="Nombre").grid(row=0, column=1, pady=10)
+        self.Nombre = tk.Entry(self.ventana_añadir)
         self.Nombre.grid(row=1, column=1, padx=10, pady=10)
 
-        tk.Label(self.ventana, text="Precio").grid(row=0, column=2, pady=10)
-        self.Precio = tk.Entry(self.ventana)
+        tk.Label(self.ventana_añadir, text="Precio").grid(row=0, column=2, pady=10)
+        self.Precio = tk.Entry(self.ventana_añadir)
         self.Precio.grid(row=1, column=2, padx=10, pady=10)
 
-        tk.Button(self.ventana, text="Añadir", command=self.Añadir_Perro).grid(row=2, column=1, pady=10)
+        tk.Button(self.ventana_añadir, text="Añadir", command=self.Añadir_Perro).grid(row=2, column=1, pady=10)
+
+        btn_cerrar = tk.Button(self.ventana_añadir, text="Cerrar", command=self.ventana_añadir.destroy)
+        btn_cerrar.grid(row=5, column=1, pady=10)
 
     def Ventana_Actualizar_Perro(self):
         self.ventana_actualizar = tk.Toplevel()
@@ -199,6 +202,9 @@ class Interfaz:
         self.mensaje_actualizar.grid(row=4, column=0, columnspan=2, pady=10)
 
         tk.Button(self.ventana_actualizar, text="Actualizar", command=self.Actualizar_Precio).grid(row=3, column=1, pady=10)
+
+        btn_cerrar = tk.Button(self.ventana_actualizar, text="Cerrar", command=self.ventana_actualizar.destroy)
+        btn_cerrar.grid(row=5, column=1, pady=10)
 
     def Actualizar_Precio(self):
         raza = self.raza_update.get()
@@ -235,6 +241,9 @@ class Interfaz:
 
         tk.Button(self.ventana_eliminar, text="Eliminar", command=self.Eliminar_Perro).grid(row=2, column=1, pady=10)
 
+        btn_cerrar = tk.Button(self.ventana_eliminar, text="Cerrar", command=self.ventana_eliminar.destroy)
+        btn_cerrar.grid(row=3, column=1, pady=10)
+
     def Eliminar_Perro(self):
         raza = self.raza_eliminar.get()
         nombre = self.nombre_eliminar.get()
@@ -262,6 +271,9 @@ class Interfaz:
         info += f"Perro más barato: {perro_mas_barato[1]} ({perro_mas_barato[0]}) - ${perro_mas_barato[2]}"
 
         tk.Label(self.ventana_mostrar, text=info, fg="blue").pack(pady=10)
+
+        btn_cerrar = tk.Button(self.ventana_mostrar, text="Cerrar", command=self.ventana_mostrar.destroy)
+        btn_cerrar.grid(row=5, column=1, pady=10)
 
     def Salir(self):
         self.ventana.destroy()
