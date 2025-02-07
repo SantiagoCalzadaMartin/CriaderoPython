@@ -146,16 +146,16 @@ class Interfaz:
         try:
             precio = int(self.Precio.get())
         except ValueError:
-            error = tk.Label(self.ventana, text="Error: Precio debe ser un número", fg="red")
+            error = tk.Label(self.ventana_añadir, text="Error: Precio debe ser un número", fg="red")
             error.grid(row=3, column=1, padx=10, pady=10)
             return
 
         if precio < 0:
-            error = tk.Label(self.ventana, text="Error: Precio no aceptable", fg="red")
+            error = tk.Label(self.ventana_añadir, text="Error: Precio no aceptable", fg="red")
             error.grid(row=3, column=1, padx=10, pady=10)
         else:
             self.perros.append([raza, nombre, precio])
-            exito = tk.Label(self.ventana, text="Perro añadido con éxito", fg="green")
+            exito = tk.Label(self.ventana_añadir, text="Perro añadido con éxito", fg="green")
             exito.grid(row=3, column=1, padx=10, pady=10)
 
 
@@ -237,12 +237,12 @@ class Interfaz:
         self.nombre_eliminar.grid(row=1, column=1, padx=10, pady=10)
 
         self.mensaje_eliminar = tk.Label(self.ventana_eliminar, text="", fg="red")
-        self.mensaje_eliminar.grid(row=3, column=0, columnspan=2, pady=10)
+        self.mensaje_eliminar.grid(row=2, column=0, columnspan=2, pady=10)
 
-        tk.Button(self.ventana_eliminar, text="Eliminar", command=self.Eliminar_Perro).grid(row=2, column=1, pady=10)
+        tk.Button(self.ventana_eliminar, text="Eliminar", command=self.Eliminar_Perro).grid(row=3, column=1, pady=10)
 
         btn_cerrar = tk.Button(self.ventana_eliminar, text="Cerrar", command=self.ventana_eliminar.destroy)
-        btn_cerrar.grid(row=3, column=1, pady=10)
+        btn_cerrar.grid(row=4, column=1, pady=10)
 
     def Eliminar_Perro(self):
         raza = self.raza_eliminar.get()
