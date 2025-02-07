@@ -264,16 +264,24 @@ class Interfaz:
             tk.Label(self.ventana_mostrar, text="No hay perros registrados", fg="red").pack(pady=10)
             return
 
-        perro_mas_caro = max(self.perros, key=lambda p: p[2])
-        perro_mas_barato = min(self.perros, key=lambda p: p[2])
+        # Encontrar el perro más caro y más barato sin usar lambda
+        perro_mas_caro = self.perros[0]
+        perro_mas_barato = self.perros[0]
 
-        info = f"Perro más caro: {perro_mas_caro[1]} ({perro_mas_caro[0]}) - ${perro_mas_caro[2]}\n"
-        info += f"Perro más barato: {perro_mas_barato[1]} ({perro_mas_barato[0]}) - ${perro_mas_barato[2]}"
+        precio_total = 0
+
+        for perro in self.perros:
+            if perro[2] > perro_mas_caro[2]:
+                perro_mas_caro = perro
+            if perro[2] < perro_mas_barato[2]:
+                perro_mas_barato = perro
+            precio_total += perro[2]
+
+        info = "Perro más caro: " + perro_mas_caro[1] + " (" + perro_mas_caro[0] + ") - $" + str(perro_mas_caro[2]) + "\n"
+        info += "Perro más barato: " + perro_mas_barato[1] + " (" + perro_mas_barato[0] + ") - $" + str(perro_mas_barato[2]) + "\n"
+        info += "\nPrecio total: " + str(precio_total) + "€"
 
         tk.Label(self.ventana_mostrar, text=info, fg="blue").pack(pady=10)
-
-        btn_cerrar = tk.Button(self.ventana_mostrar, text="Cerrar", command=self.ventana_mostrar.destroy)
-        btn_cerrar.grid(row=5, column=1, pady=10)
 
     def Salir(self):
         self.ventana.destroy()
