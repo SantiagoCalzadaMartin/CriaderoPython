@@ -1,4 +1,6 @@
+import textwrap
 class Terminal:
+
 
 # Array de arrays que contiene las razas de perros, sus nombres y sus precios
     perros = [
@@ -141,7 +143,7 @@ class Terminal:
 
 # El método valor_total se encarga de devolver cuanto vale en total el conjunto de todos los perros de la base de datos
     def valor_total(self):
-        print("\n" * 10)
+        print("\n" * 2)
         total = 0
         for perro in self.perros:
             total += perro[2]
@@ -149,6 +151,50 @@ class Terminal:
         print("\n" * 2)
         input("Pulsa Enter para continuar")
         print("\n" * 10)
+
+# El método para imprimir un ticket de compra
+    def imprimir_ticket(self, perro, precio):
+        ticket = f"""
+        ==============================
+                  CRIADERO PYTHON       
+        ==============================
+        Perro comprado: {perro}
+        Precio: ${precio:.2f}
+        ==============================
+        ¡Gracias por su compra!
+        """
+        print(textwrap.dedent(ticket))
+        enter = input("Presiona enter para continuar...")
+
+# El método para comprar un perro
+    def comprar_perro(self):
+        self.ver_base_datos()
+        try:
+            fin = False
+            text = ""
+            while fin==False:
+                opcion = input("\nSeleccione el perro que desea comprar: ")
+                for perro in self.perros:
+                    if opcion == perro[1]:
+                        fin = True
+                    else:
+                        text = "Opción inválida. Intente de nuevo."
+                if fin == False:
+                    print(text)
+                    fin=True
+                    
+            
+            for perro in self.perros:
+                if opcion == perro[1]:
+                    perro_seleccionado = perro[1]
+                    precio = perro[2]
+                    self.perros.remove(perro)
+            
+            print("\nProcesando compra...\n")
+            self.imprimir_ticket(perro_seleccionado, precio)
+        
+        except ValueError:
+            print("Por favor, ingrese un número válido.")
 
 # El método buscar_datos se encarga de englobar todos los metodos de busqueda de datos en un menú para que elija el usuario cual quiere utilizar
     def buscar_datos(self):
@@ -173,7 +219,7 @@ class Terminal:
         fin = True
         while fin == True:
             print("\n" * 10)
-            opcion = int(input("Elige la opción\n1- Mostrar datos\n2- Añadir perro\n3- Actualizar precio\n4- Eliminar productos del inventario\n5- Salir del programa\n"))
+            opcion = int(input("Elige la opción\n1- Mostrar datos\n2- Añadir perro\n3- Actualizar precio\n4- Eliminar productos del inventario\n5- Comprar un perro\n6- Salir del programa\n"))
             match opcion:
                 case 1:
                     self.buscar_datos()
@@ -184,6 +230,8 @@ class Terminal:
                 case 4:
                     self.eliminar_producto()
                 case 5:
+                    self.comprar_perro()
+                case 6:
                     print("Saliendo...")
                     fin == False
                     break
